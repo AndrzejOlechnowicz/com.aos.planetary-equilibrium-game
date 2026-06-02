@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073522302257204489449d4ff172057b, type: 3}
+  m_Name: Initial Values
+  m_EditorClassIdentifier: Assembly-CSharp::InitialValues
+  modules:
+  - moduleSO: {fileID: 11400000, guid: d5a7c676d2ae81f4b920eff595200d3d, type: 2}
+    initialValue: 0.2
+  - moduleSO: {fileID: 11400000, guid: 25ec4b0cedfb2bc4d970ccb6ec478e0e, type: 2}
+    initialValue: 0.4
+  - moduleSO: {fileID: 11400000, guid: 2a19fe632e5336c4980b593a63bfaf2e, type: 2}
+    initialValue: 0.2
+  - moduleSO: {fileID: 11400000, guid: 2c63c945a1f6456488d221d54b38f97b, type: 2}
+    initialValue: 0
+  - moduleSO: {fileID: 11400000, guid: 9ecda4643e9fcc34f915b53c48f7cf7c, type: 2}
+    initialValue: 0
+  - moduleSO: {fileID: 11400000, guid: af68c3326d2fddb4f9aba8e17fdc3cc1, type: 2}
+    initialValue: 0
+  - moduleSO: {fileID: 11400000, guid: 08ecf9c7a76fad444b6f9b92ad34d6ce, type: 2}
+    initialValue: 0.2
+  - moduleSO: {fileID: 11400000, guid: a99b4af0fb25eee48b11123591e67766, type: 2}
+    initialValue: 0.2
+  - moduleSO: {fileID: 11400000, guid: 210cf69b9b17d4d4c8e41ba53893a540, type: 2}
+    initialValue: 0.1

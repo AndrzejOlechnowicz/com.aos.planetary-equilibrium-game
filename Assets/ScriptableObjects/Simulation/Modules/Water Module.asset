@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d8129c2a7606945a4fc937a7db2fac, type: 3}
+  m_Name: Water Module
+  m_EditorClassIdentifier: Assembly-CSharp::WaterModule
+  metadata:
+    Id: water
+    DisplayName: Water Module
+    Provides:
+    - dW
+    Requires: []
+    Deterministic: 1
+    Description: 
+    Icon: {fileID: 21300000, guid: 5bd873e9d8c6c4442b046b8684a9f810, type: 3}
+  condensationRate: 0.015
+  evaporationRate: 0.01
+  tectonicRelease: 0.01
+  outflowRate: 0.01
+  freezePoint: 0.1
+  boilPoint: 0.8
+  baselineCondensation: 0.01
+  tectonicsModule: {fileID: 11400000, guid: 08ecf9c7a76fad444b6f9b92ad34d6ce, type: 2}
+  temperatureModule: {fileID: 11400000, guid: d5a7c676d2ae81f4b920eff595200d3d, type: 2}
+  iceModule: {fileID: 11400000, guid: a99b4af0fb25eee48b11123591e67766, type: 2}
+  vaporModule: {fileID: 11400000, guid: 210cf69b9b17d4d4c8e41ba53893a540, type: 2}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ca20f4832fd224bb3cb5949ca7211c, type: 3}
+  m_Name: Temperature Module
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetaryEquilibrium.Simulation.TemperatureModule
+  metadata:
+    Id: temperature
+    DisplayName: Temperature Module
+    Provides: []
+    Requires: []
+    Deterministic: 1
+    Description: 
+    Icon: {fileID: 21300000, guid: a5fed37d34b411941a2ebf9b270e7d87, type: 3}
+  solarHeating: 0.01
+  greenhouseHeating: 0.1
+  waterCooling: 0.01
+  plantCooling: 0.05
+  tectonicHeating: 0.01
+  radiativeCooling: 0.01
+  waterModule: {fileID: 11400000, guid: 25ec4b0cedfb2bc4d970ccb6ec478e0e, type: 2}
+  oxygenModule: {fileID: 11400000, guid: 2a19fe632e5336c4980b593a63bfaf2e, type: 2}
+  floraModule: {fileID: 11400000, guid: 9ecda4643e9fcc34f915b53c48f7cf7c, type: 2}
+  tectonicsModule: {fileID: 11400000, guid: 08ecf9c7a76fad444b6f9b92ad34d6ce, type: 2}
+  greenhouseGasModule: {fileID: 11400000, guid: 2c63c945a1f6456488d221d54b38f97b, type: 2}
+  iceModule: {fileID: 11400000, guid: a99b4af0fb25eee48b11123591e67766, type: 2}
+  vaporModule: {fileID: 11400000, guid: 210cf69b9b17d4d4c8e41ba53893a540, type: 2}

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cf1c65a8e9d0f4c956d1ff64a8ff30, type: 3}
+  m_Name: Ice Module
+  m_EditorClassIdentifier: Assembly-CSharp::PlanetaryEquilibrium.Simulation.IceModule
+  metadata:
+    Id: ice
+    DisplayName: Ice Module
+    Deterministic: 1
+    Description: 
+    Icon: {fileID: 21300000, guid: 30e9b2a8bdab01641850e282594113ad, type: 3}
+  freezePoint: 0.1
+  freezeSharpness: 8
+  freezingRate: 0.03
+  meltingRate: 0.03
+  waterModule: {fileID: 11400000, guid: 25ec4b0cedfb2bc4d970ccb6ec478e0e, type: 2}
+  temperatureModule: {fileID: 11400000, guid: d5a7c676d2ae81f4b920eff595200d3d, type: 2}
