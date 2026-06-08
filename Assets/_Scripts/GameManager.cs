@@ -77,12 +77,7 @@ public class GameManager : MonoBehaviour
     private void NextStep()
     {
         var speedMultiplier = timeController.GetSpeed();
-        //simulation.StepMultiple(speedMultiplier);
-
-        for(int i = 0; i< speedMultiplier; i++)
-        {
-            simulation.Step();
-        }
+        simulation.StepMultiple(speedMultiplier);
     }
 
     private void SimulationStart()
