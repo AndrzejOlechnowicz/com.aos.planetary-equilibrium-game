@@ -42,7 +42,6 @@ namespace CodependantModules.Simulation
             }
             else
             {
-                UnityEngine.Debug.LogError($"There was no module with the name: {name} in the registry");
                 return -1;
             }
         }

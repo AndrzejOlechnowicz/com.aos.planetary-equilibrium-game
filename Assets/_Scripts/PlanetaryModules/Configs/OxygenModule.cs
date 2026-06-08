@@ -16,12 +16,10 @@ public class OxygenModule : SimulationModule
     [Header("Required Modules")]
     [SerializeField] private FloraModule floraModule;
     [SerializeField] private FaunaModule faunaModule;
-    [SerializeField] private TectonicsModule tectonicsModule;
 
     private int oxygenIndex;
     private int floraIndex;
     private int faunaIndex;
-    private int tectonicsIndex;
 
     public override void Init(ModuleRegistry registry, int seed)
     {
@@ -30,7 +28,6 @@ public class OxygenModule : SimulationModule
         oxygenIndex = registry.GetIndex(Metadata.Id);
         floraIndex = registry.GetIndex(floraModule.Metadata.Id);
         faunaIndex = registry.GetIndex(faunaModule.Metadata.Id);
-        tectonicsIndex = registry.GetIndex(tectonicsModule.Metadata.Id);
     }
 
     public override IModuleCompute GetModuleCompute()

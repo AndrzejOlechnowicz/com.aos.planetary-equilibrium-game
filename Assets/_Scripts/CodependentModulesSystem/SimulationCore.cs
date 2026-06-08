@@ -36,7 +36,6 @@ namespace CodependantModules.Simulation
             _integrator = integrator ?? throw new ArgumentNullException(nameof(integrator));
             CurrentState = initialState;
 
-            //equilibriumDerivativesMax = CurrentState.Dt / 2;
 
             EnsureBuffersMatchState();
         }

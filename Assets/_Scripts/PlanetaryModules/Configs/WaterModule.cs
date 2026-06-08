@@ -6,24 +6,19 @@ public class WaterModule : SimulationModule
 {
     public float TectonicRelease => tectonicRelease;
     public float OutflowRate => outflowRate;
-    public float BaselineCondensation => baselineCondensation;
 
     [Header("Water Cycle Coefficients")]
     [SerializeField] private float tectonicRelease = 0.01f;
     [SerializeField] private float outflowRate = 0.05f;
 
-    [Header("Stability Adjustment")]
-    [SerializeField] private float baselineCondensation = 0.01f;
 
     [Header("Required Modules")]
-    [SerializeField] private TectonicsModule tectonicsModule;
     [SerializeField] private TemperatureModule temperatureModule;
     [SerializeField] private IceModule iceModule;
     [SerializeField] private VaporModule vaporModule;
 
     private int waterIndex;
     private int temperatureIndex;
-    private int tectonicsIndex;
     private int iceIndex;
     private int vaporIndex;
 
@@ -33,7 +28,6 @@ public class WaterModule : SimulationModule
 
         waterIndex = registry.GetIndex(Metadata.Id);
         temperatureIndex = registry.GetIndex(temperatureModule.Metadata.Id);
-        tectonicsIndex = registry.GetIndex(tectonicsModule.Metadata.Id);
         iceIndex = registry.GetIndex(iceModule.Metadata.Id);
         vaporIndex = registry.GetIndex(vaporModule.Metadata.Id);
     }
@@ -45,6 +39,6 @@ public class WaterModule : SimulationModule
 
     public override IModuleCompute GetModuleCompute()
     {
-        return new WaterModuleCompute(this, iceModule, vaporModule, waterIndex, iceIndex, vaporIndex, temperatureIndex, tectonicsIndex);
+        return new WaterModuleCompute(this, iceModule, vaporModule, waterIndex, iceIndex, vaporIndex, temperatureIndex);
     }
 }

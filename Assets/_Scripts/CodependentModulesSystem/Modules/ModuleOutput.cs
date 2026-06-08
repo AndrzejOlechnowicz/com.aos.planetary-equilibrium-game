@@ -7,7 +7,6 @@ namespace CodependantModules.Simulation
     /// ModuleOutput: typed container modules return from Compute.
     /// - Derivatives: dX (not scaled by dt)
     /// - LinearCoeffs: summed linear coefficients for semi-implicit integration
-    /// - Diagnostics: arbitrary tuning values
     /// Designed for efficient aggregation by SimulationCore/ModuleRegistry.
     /// </summary>
     [Serializable]
@@ -40,19 +39,6 @@ namespace CodependantModules.Simulation
                 Derivatives[i] += other.Derivatives[i];
                 LinearCoeffs[i] += other.LinearCoeffs[i];
             }
-        }
-
-        /// <summary>
-        /// Resize arrays to a new stateCount, preserving existing values where possible.
-        /// Useful when the global state schema grows.
-        /// </summary>
-        public void Resize(int newStateCount)
-        {
-            if (newStateCount <= 0) throw new ArgumentException("newStateCount must be > 0");
-            if (newStateCount == Length) return;
-
-            Array.Resize(ref Derivatives, newStateCount);
-            Array.Resize(ref LinearCoeffs, newStateCount);
         }
 
         public void Clear()

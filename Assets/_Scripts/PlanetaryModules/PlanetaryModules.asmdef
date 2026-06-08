@@ -1,0 +1,16 @@
+{
+    "name": "PlanetaryModules",
+    "rootNamespace": "",
+    "references": [
+        "GUID:bffa5ac0365733f4686e1cd819ca7cc9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
