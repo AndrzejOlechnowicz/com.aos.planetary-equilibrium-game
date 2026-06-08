@@ -4,14 +4,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Planetary/Modules/Water")]
 public class WaterModule : SimulationModule
 {
-    public float TectonicRelease => tectonicRelease;
-    public float OutflowRate => outflowRate;
-
-    [Header("Water Cycle Coefficients")]
-    [SerializeField] private float tectonicRelease = 0.01f;
-    [SerializeField] private float outflowRate = 0.05f;
-
-
     [Header("Required Modules")]
     [SerializeField] private TemperatureModule temperatureModule;
     [SerializeField] private IceModule iceModule;

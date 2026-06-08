@@ -28,7 +28,7 @@ public class IceModule : SimulationModule
         base.Init(registry, seed);
 
         iceIndex = registry.GetIndex(Metadata.Id);
-        waterIndex = registry.GetIndex(Metadata.Id);
+        waterIndex = registry.GetIndex(waterModule.Metadata.Id);
         temperatureIndex = registry.GetIndex(temperatureModule.Metadata.Id);
     }
 

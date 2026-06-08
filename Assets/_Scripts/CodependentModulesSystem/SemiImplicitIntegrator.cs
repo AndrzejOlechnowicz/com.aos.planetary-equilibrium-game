@@ -82,10 +82,8 @@ namespace CodependantModules.Simulation
                 }
             }
 
-            // Build next PlanetState (not clamped here; SimulationCore will clamp)
-            var next = snapshot;
-            next.SetValues(nextArr);
-            return next;
+            // Build next SystemState
+            return snapshot.WithValues(nextArr);
         }
     }
 }

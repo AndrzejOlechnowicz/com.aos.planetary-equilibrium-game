@@ -27,7 +27,7 @@ public class VaporModule : SimulationModule
         base.Init(registry, seed);
 
         vaporIndex = registry.GetIndex(Metadata.Id);
-        waterIndex = registry.GetIndex(Metadata.Id);
+        waterIndex = registry.GetIndex(waterModule.Metadata.Id);
         temperatureIndex = registry.GetIndex(temperatureModule.Metadata.Id);
     }
 

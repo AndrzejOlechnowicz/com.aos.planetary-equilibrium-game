@@ -23,15 +23,12 @@ public class VaporModuleCompute : IModuleCompute
         float water = snapshot.Get(waterIndex);
         float temperature = snapshot.Get(temperatureIndex);
 
-        float evaporationSuitability = Helpers.Sigmoid(config.VaporSharpness * (temperature - config.EvaporationPoint));
+        var evaporationSuitability = WaterPhasesMath.GetSuitability(temperature, config.EvaporationPoint, config.VaporSharpness);
 
-        float condensationSuitability =
-            1f - evaporationSuitability;
-
-        float evaporation = config.EvaporationRate * water * evaporationSuitability;
-
-        float condensation = config.CondensationRate * vapor * condensationSuitability;
-
+        float evaporation = config.EvaporationRate * water * evaporationSuitability.Forward;
+        
+        float condensation = config.CondensationRate * vapor * evaporationSuitability.Reverse;
+        
         float vaporDerivative =
             + evaporation
             - condensation;

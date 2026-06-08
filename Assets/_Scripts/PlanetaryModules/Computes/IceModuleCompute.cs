@@ -23,14 +23,12 @@ public class IceModuleCompute : IModuleCompute
         float water = snapshot.Get(waterIndex);
         float temperature = snapshot.Get(temperatureIndex);
 
-        float freezingSuitability = 1f - Helpers.Sigmoid(config.FreezeSharpness * (temperature - config.FreezePoint));
+        var freezingSuitability = WaterPhasesMath.GetSuitability(temperature, config.FreezePoint, config.FreezeSharpness);
 
-        float meltingSuitability = 1f - freezingSuitability;
-
-        float freezing = config.FreezingRate * water * freezingSuitability;
-
-        float melting = config.MeltingRate * ice * meltingSuitability;
-
+        float freezing = config.FreezingRate * water * freezingSuitability.Forward;
+        
+        float melting = config.MeltingRate * ice * freezingSuitability.Reverse;
+        
         float iceDerivative =
             + freezing
             - melting;

@@ -1,4 +1,5 @@
 using CodependantModules.Simulation;
+using UnityEngine;
 
 public class WaterModuleCompute : IModuleCompute
 {
@@ -11,7 +12,6 @@ public class WaterModuleCompute : IModuleCompute
     private readonly int iceIndex;
     private readonly int vaporIndex;
     private readonly int temperatureIndex;
-    private readonly int tectonicsIndex;
 
     public WaterModuleCompute(
         WaterModule config,
@@ -20,8 +20,7 @@ public class WaterModuleCompute : IModuleCompute
         int waterIndex,
         int iceIndex,
         int vaporIndex,
-        int temperatureIndex,
-        int tectonicsIndex)
+        int temperatureIndex)
     {
         this.config = config;
         this.iceConfig = iceConfig;
@@ -31,7 +30,6 @@ public class WaterModuleCompute : IModuleCompute
         this.iceIndex = iceIndex;
         this.vaporIndex = vaporIndex;
         this.temperatureIndex = temperatureIndex;
-        this.tectonicsIndex = tectonicsIndex;
     }
 
     public ModuleOutput Compute(in SystemState snapshot, double time)
@@ -40,53 +38,38 @@ public class WaterModuleCompute : IModuleCompute
         float ice = snapshot.Get(iceIndex);
         float vapor = snapshot.Get(vaporIndex);
         float temperature = snapshot.Get(temperatureIndex);
-        float tectonics = snapshot.Get(tectonicsIndex);
 
         //
         // ICE TRANSITIONS
         //
 
-        float freezingSuitability = 1f - Helpers.Sigmoid(iceConfig.FreezeSharpness * (temperature - iceConfig.FreezePoint));
-
-        float meltingSuitability = 1f - freezingSuitability;
-
-        float freezing = iceConfig.FreezingRate * water * freezingSuitability;
-
-        float melting = iceConfig.MeltingRate * ice * meltingSuitability;
-
+        var freezingSuitability = WaterPhasesMath.GetSuitability(temperature, iceConfig.FreezePoint, iceConfig.FreezeSharpness);
+        
+        float freezing = iceConfig.FreezingRate * water * freezingSuitability.Forward;
+        
+        float melting = iceConfig.MeltingRate * ice * freezingSuitability.Reverse;
+        
         //
         // VAPOR TRANSITIONS
         //
+        var evaporationSuitability = WaterPhasesMath.GetSuitability(temperature, vaporConfig.EvaporationPoint, vaporConfig.VaporSharpness);
 
-        float evaporationSuitability = Helpers.Sigmoid(vaporConfig.VaporSharpness * (temperature - vaporConfig.EvaporationPoint));
-
-        float condensationSuitability = 1f - evaporationSuitability;
-
-        float evaporation = vaporConfig.EvaporationRate * water * evaporationSuitability;
-
-        float condensation = vaporConfig.CondensationRate * vapor * condensationSuitability;
-
+        float evaporation = vaporConfig.EvaporationRate * water * evaporationSuitability.Forward;
+        
+        float condensation = vaporConfig.CondensationRate * vapor * evaporationSuitability.Reverse;
+        
         //
         // LIQUID WATER BALANCE
         //
 
         float waterDerivative =
             // ice exchange
-            -freezing
+            - freezing
             + melting
 
             // vapor exchange
             - evaporation
-            + condensation
-
-            // tectonics
-            + config.TectonicRelease * tectonics
-
-            // losses
-            - config.OutflowRate * water
-
-            // baseline replenishment
-            + config.BaselineCondensation;
+            + condensation;
 
         var output = new ModuleOutput(snapshot.Length);
 
