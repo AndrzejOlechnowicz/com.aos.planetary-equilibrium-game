@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CodependantModules.Simulation
@@ -9,7 +10,7 @@ namespace CodependantModules.Simulation
     /// - SimulationCore and modules operate by index (use a separate StateSchema to map names to indices).
     /// </summary>
     [Serializable]
-    public class SystemState
+    public class SystemState : IEquatable<SystemState>
     {
         public float DeltaTime => dT;
         public double Time => time;
@@ -45,24 +46,91 @@ namespace CodependantModules.Simulation
         }
 
         public int Length => Values?.Length ?? 0;
-        public float Get(int index) => Values[index];
-        public void SetValues(float[] values) => Values = values;
+        public float Get(int index)
+        {
+            if (index < 0 || index >= Values.Length)
+                return 0;
+
+            return Values[index];
+        }
+        public SystemState WithValues(float[] values)
+        {
+            return Copy(values);
+        }
+
+        public bool Equals(SystemState other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+
+            if (ReferenceEquals(this, other))
+                return true;
+
+            if (time != other.time ||
+                dT != other.dT ||
+                step != other.step)
+                return false;
+
+            if (Values == null || other.Values == null)
+                return Values == other.Values;
+
+            if (Values.Length != other.Values.Length)
+                return false;
+
+            for (int i = 0; i < Values.Length; i++)
+            {
+                if (Values[i] != other.Values[i])
+                    return false;
+            }
+
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as SystemState);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+
+            hash.Add(time);
+            hash.Add(dT);
+            hash.Add(step);
+
+            if (Values != null)
+            {
+                foreach (var value in Values)
+                    hash.Add(value);
+            }
+
+            return hash.ToHashCode();
+        }
+
+        public static bool operator ==(SystemState left, SystemState right)
+        {
+            return EqualityComparer<SystemState>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(SystemState left, SystemState right)
+        {
+            return !(left == right);
+        }
 
         /// <summary>
         /// Apply an additive impulse to a single state index. The modified state variable is clamped to [0,1]
         /// </summary>
         public SystemState WithImpulse(int index, float magnitude)
         {
-            var copy = this;
-            var arr = (float[])Values.Clone();
+            float[] values = new float[Values.Length];
 
-            var valueWithImpulse = arr[index] + magnitude;
-            if (valueWithImpulse > 1 || valueWithImpulse < 0)
-                valueWithImpulse = Mathf.Clamp01(valueWithImpulse);
+            for (int i = 0; i < Values.Length; i++)
+                values[i] = Values[i];
 
-            arr[index] = valueWithImpulse;
-            copy.Values = arr;
-            return copy;
+            values[index] = Mathf.Clamp01(values[index] + magnitude);
+
+            return Copy(values: values);
         }
 
         /// <summary>
@@ -70,21 +138,26 @@ namespace CodependantModules.Simulation
         /// </summary>
         public SystemState Clamped()
         {
-            var copy = this;
-            var arr = (float[])Values.Clone();
-            for (int i = 0; i < arr.Length; ++i) 
-                arr[i] = Mathf.Clamp01(arr[i]);
-            copy.Values = arr;
-            return copy;
+            float[] values = new float[Values.Length];
+
+            for (int i = 0; i < Values.Length; i++)
+                values[i] = Mathf.Clamp01(Values[i]);
+
+            return Copy(values: values);
         }
 
         public SystemState WithTime(double time, int step, float dt)
         {
-            var s = this;
-            s.time = time;
-            s.step = step;
-            s.dT = dt;
-            return s;
+            return Copy(time: time, step: step, dt: dt);
+        }
+
+        private SystemState Copy(float[] values = null, double? time = null, float? dt = null, int? step = null)
+        {
+            return new SystemState(
+                values ?? (float[])Values.Clone(),
+                time ?? this.time,
+                dt ?? dT,
+                step ?? this.step);
         }
     }
 }
