@@ -100,8 +100,10 @@ namespace CodependantModules.Simulation
                     // Call integrator to compute next state (not clamped)
                     var next = _integrator.Step(in snapshot, _aggregatedOutput, CurrentState.DeltaTime);
 
-                    // Apply clamping and update time/step
+                    // Apply clamping
                     next = next.Clamped();
+
+                    // Update time/step
                     next = next.WithTime(CurrentState.Time + CurrentState.DeltaTime, CurrentState.Step + 1, CurrentState.DeltaTime);
 
                     // Commit

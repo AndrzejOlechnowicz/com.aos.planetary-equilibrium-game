@@ -29,4 +29,14 @@ public class ImpulseTest
         Assert.AreEqual(0.6f, modified.Get(0));
     }
 
+    [Test]
+    public void Impulse_ShouldClampToOne()
+    {
+        var state = new SystemState(new[] { 0.9f });
+
+        var modified = state.WithImpulse(0, 1f);
+
+        Assert.AreEqual(1f, modified.Get(0));
+    }
+
 }

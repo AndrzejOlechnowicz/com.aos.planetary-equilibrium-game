@@ -55,4 +55,44 @@ public class DomainTest
         
         Assert.AreEqual(initialTotalMass, finalTotalMass, 1e-5f);
     }
+
+    [Test]
+    public void WaterCycle_DerivativesConserveMass()
+    {
+        float water = 0.5f;
+        float ice = 0.3f;
+        float vapor = 0.2f;
+        float temperature = 0.4f;
+
+        var waterModule = Resources.Load<ScriptableObject>("Water Module") as WaterModule;
+        var iceModule = Resources.Load<ScriptableObject>("Ice Module") as IModuleConfig;
+        var vaporModule = Resources.Load<ScriptableObject>("Vapor Module") as IModuleConfig;
+
+        var snapshot = new SystemState(new[]
+        {
+            water,
+            ice,
+            vapor,
+            temperature
+        });
+
+        var outputs = new[]
+        {
+            waterModule.GetModuleCompute().Compute(snapshot, 0),
+            iceModule.GetModuleCompute().Compute(snapshot, 0),
+            vaporModule.GetModuleCompute().Compute(snapshot, 0)
+        };
+
+        float totalDerivative = 0;
+
+        foreach (var output in outputs)
+        {
+            totalDerivative += output.Derivatives[0];
+            totalDerivative += output.Derivatives[1];
+            totalDerivative += output.Derivatives[2];
+        }
+
+        Assert.AreEqual(0f, totalDerivative, 1e-6f);
+    }
+
 }
