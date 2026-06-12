@@ -95,4 +95,34 @@ public class DomainTest
         Assert.AreEqual(0f, totalDerivative, 1e-6f);
     }
 
+    [Test]
+    public void GreenhouseGasses_IncreaseTemperature()
+    {
+        var temperatureModule = Resources.Load<ScriptableObject>("Temperature Module") as IModuleConfig;
+        var ghgModule = Resources.Load<ScriptableObject>("Greenhouse Gas Module") as IModuleConfig;
+
+        var modules = new IModuleConfig[] { temperatureModule, ghgModule };
+
+        // initiate the modules registry
+        var moduleRegistry = new ModuleRegistry(modules);
+
+        // create the integrator
+        IIntegrator integrator = new SemiImplicitIntegrator();
+
+        float temperature = 0.3f;
+        float ghg = 0.6f;
+
+        var snapshot = new SystemState(new[]
+        {
+            temperature,
+            ghg
+        });
+
+        // setup the simulation core
+        SimulationCore simulation = new SimulationCore(moduleRegistry, integrator, snapshot);
+
+        simulation.StepMultiple(100);
+
+        Assert.IsTrue(simulation.CurrentState.Get(0) > temperature);
+    }
 }
