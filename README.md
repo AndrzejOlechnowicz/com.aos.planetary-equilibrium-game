@@ -2,6 +2,8 @@
 
 A modular simulation framework developed for a planetary ecosystem game in Unity.
 
+![Planet showcase](planet_showcase.gif)
+
 The project models a set of interconnected environmental systems (temperature, water cycle, atmosphere, flora, tectonics, etc.) as a dynamic system where each module contributes to the evolution of the global state over time.
 
 Although originally designed for a planetary simulation, the core architecture is intentionally separated from game-specific logic and built around reusable simulation concepts such as state variables, modules, derivatives, and numerical integration.
