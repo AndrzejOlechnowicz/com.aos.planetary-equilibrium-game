@@ -39,7 +39,7 @@ Material:
     m_Floats:
     - _DayNightEnabled: 0.02
     - _DayNightSoftness: 0.01
-    - _FloraLevel: 0
+    - _FloraLevel: 0.87389714
     - _FloraReplace: 1
     - _FloraSoftness: 0
     - _FloraThreshold: 0
@@ -49,18 +49,18 @@ Material:
     - _NightDarkness: 0.835
     - _NoiseTiling: 1
     - _StylizeFlatness: 0.054
-    - _Temperature: 0.30815598
-    - _WaterLevel: 0.407351
+    - _Temperature: 0.539597
+    - _WaterLevel: 0.31788066
     m_Colors:
     - _DesertColor: {r: 0.85, g: 0.75, b: 0.45, a: 1}
     - _FloraColor: {r: 0.0470588, g: 0.80784315, b: 0.41960782, a: 1}
     - _ForestColor: {r: 0.14999998, g: 0.45, b: 0.14999998, a: 1}
     - _GrassColor: {r: 0.54999995, g: 0.75, b: 0.34999996, a: 1}
-    - _IceColor: {r: 0.6808473, g: 0.90392935, b: 0.9433962, a: 1}
-    - _LandBase: {r: 0.28235295, g: 0.20784314, b: 0.09803922, a: 1}
+    - _IceColor: {r: 0.68235296, g: 0.94509804, b: 0.9420573, a: 1}
+    - _LandBase: {r: 0.28235295, g: 0.2386363, b: 0.17421177, a: 1}
     - _MountainColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _OceanDeep: {r: 0.011764706, g: 0.015686275, b: 0.36862746, a: 1}
-    - _OceanShallow: {r: 0, g: 0.62352943, b: 0.7176471, a: 1}
+    - _OceanDeep: {r: 0.11672302, g: 0.119898215, b: 0.4056604, a: 1}
+    - _OceanShallow: {r: 0.27772337, g: 0.6860982, b: 0.745283, a: 1}
     - _SunDirection: {r: 0.89, g: 0.59, b: -15.89, a: 0}
     - _TundraColor: {r: 0.65, g: 0.75, b: 0.65, a: 1}
   m_BuildTextureStacks: []
