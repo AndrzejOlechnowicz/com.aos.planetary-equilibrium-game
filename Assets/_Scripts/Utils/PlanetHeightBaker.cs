@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 /// <summary>
@@ -41,15 +42,16 @@ public class PlanetHeightBaker : MonoBehaviour
     float[] sampleBuffer; // width*height floats
 
 
-    void Start()
+    private void OnDestroy()
     {
-        if (autoBakeOnStart) StartBake();
+        if (heightTexture != null)
+        {
+            Destroy(heightTexture);
+        }
     }
 
-    [ContextMenu("Start Bake")]
-    public void StartBake()
+    public async void StartBakeAsync()
     {
-        StopAllCoroutines();
         rng = new System.Random(seed);
         octaveOffsets = new Vector2[octaves];
         for (int i = 0; i < octaves; i++)
@@ -61,10 +63,10 @@ public class PlanetHeightBaker : MonoBehaviour
 
         sampleBuffer = new float[width * height];
 
-        StartCoroutine(BakeCoroutine());
+        await BakeHeightTextureAsync();
     }
 
-    IEnumerator BakeCoroutine()
+    public async Awaitable BakeHeightTextureAsync()
     {
         int w = width, h = height;
         float invW = 1f / (w - 1);
@@ -73,6 +75,10 @@ public class PlanetHeightBaker : MonoBehaviour
         // First pass: sample noise into buffer and apply bias/contrast
         float minV = float.MaxValue;
         float maxV = float.MinValue;
+
+        await Awaitable.BackgroundThreadAsync();
+
+        var pixels = new Color32[width * height];
 
         for (int y = 0; y < h; y++)
         {
@@ -101,14 +107,6 @@ public class PlanetHeightBaker : MonoBehaviour
                 if (elev < minV) minV = elev;
                 if (elev > maxV) maxV = elev;
             }
-
-            if (y % 8 == 0) 
-            {
-                if(y != 0)
-                    bakeProgress = y / 2 * h;
-                yield return null;
-            }
-            
         }
 
         // Avoid degenerate case
@@ -126,18 +124,18 @@ public class PlanetHeightBaker : MonoBehaviour
                 int idx = y * w + x;
                 float v = (sampleBuffer[idx] - minV) / (maxV - minV);
                 v = Mathf.Clamp01(v);
-                Color c = new Color(v, v, v, 1f);
-                heightTexture.SetPixel(x, y, c);
+
+                byte value = (byte)(v * 255);
+                Color32 color = new Color32(value, value, value, 255);
+                pixels[y * w + x] = color;
             }
 
-            if (y % 8 == 0)
-            {
-                if (y != 0)
-                    bakeProgress = 0.5f + (y / h * 2);
-                yield return null;
-            } 
         }
 
+        await Awaitable.MainThreadAsync();
+        destroyCancellationToken.ThrowIfCancellationRequested();
+
+        heightTexture.SetPixels32(pixels);
         heightTexture.Apply(generateMipmaps, false);
 
         if (targetMaterial != null && !string.IsNullOrEmpty(materialTextureProperty))
