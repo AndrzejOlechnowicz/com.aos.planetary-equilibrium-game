@@ -37,6 +37,11 @@ public class ScoreManager
         equilibriumPoints -= GameManager.InputCost;
     }
 
+    public void AddEqPoints()
+    {
+        equilibriumPoints += 10;
+    }
+
     private void AddEQPoints(SystemState state, ModuleOutput stepOutput)
     {
         isAtEquilibrium = IsPlanetAtEquilibrium(stepOutput);

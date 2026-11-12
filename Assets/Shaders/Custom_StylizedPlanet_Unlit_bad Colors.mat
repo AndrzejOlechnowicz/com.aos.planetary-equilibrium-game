@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Custom_StylizedPlanet_Unlit_bad Colors
+  m_Shader: {fileID: 4800000, guid: 45b1b54d23100534581b53ef6fc31b79, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _HeightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MoistureMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTile:
+        m_Texture: {fileID: 2800000, guid: 5fd9c9ad1c366e344b60aaa3f35b4f3e, type: 3}
+        m_Scale: {x: 8.19, y: 5.23}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _DayNightEnabled: 0.02
+    - _DayNightSoftness: 0.01
+    - _FloraLevel: 0.44219372
+    - _FloraReplace: 1
+    - _FloraSoftness: 0
+    - _FloraThreshold: 0
+    - _IceFalloff: 0.414
+    - _IceRimWidth: 0.1123
+    - _IceStartLatitude: 0
+    - _NightDarkness: 0.835
+    - _NoiseTiling: 1
+    - _StylizeFlatness: 0.054
+    - _Temperature: 0.6518566
+    - _WaterLevel: 0.31231636
+    m_Colors:
+    - _DesertColor: {r: 0.85, g: 0.75, b: 0.45, a: 1}
+    - _FloraColor: {r: 0.07246375, g: 1, b: 0, a: 1}
+    - _ForestColor: {r: 0.14999998, g: 0.45, b: 0.14999998, a: 1}
+    - _GrassColor: {r: 0.54999995, g: 0.75, b: 0.34999996, a: 1}
+    - _IceColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LandBase: {r: 0.65882355, g: 0.24175549, b: 0, a: 1}
+    - _MountainColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _OceanDeep: {r: 0, g: 0.009901047, b: 1, a: 1}
+    - _OceanShallow: {r: 0, g: 0.5885868, b: 1, a: 1}
+    - _SunDirection: {r: 0.89, g: 0.59, b: -15.89, a: 0}
+    - _TundraColor: {r: 0.65, g: 0.75, b: 0.65, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

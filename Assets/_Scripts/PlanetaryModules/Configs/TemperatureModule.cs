@@ -64,7 +64,7 @@ public class TemperatureModule : SimulationModule
 
     public override string GetReadableData(float value)
     {
-        return value.ToString("N2");//NormalizedToCelsius(value, freezePoint, boilPoint).ToString("n0") + "°C";
+        return NormalizedToCelsius(value, freezePoint, boilPoint).ToString("n0") + "°C";//value.ToString("N2");//NormalizedToCelsius(value, freezePoint, boilPoint).ToString("n0") + "°C";
     }
 
     private float NormalizedToCelsius(float tNorm, float freezeNorm, float boilNorm)

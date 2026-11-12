@@ -22,7 +22,7 @@ public class TimeController : MonoBehaviour
             case TimeSpeed.fast: 
                 return 2;
             case TimeSpeed.fastest:
-                return 5;
+                return 10;
             default:
                 return 1;
         }

@@ -14,9 +14,14 @@ public class PlanetLoadingBlend : MonoBehaviour
 
     private void Start()
     {
-        gameManager.OnSimulationStart += Hide;
+        GameManager.OnSimulationStart += Hide;
         loadingText.SetText("Finding suitable planet...");
         textCoro = StartCoroutine(LoadingTextAnimCoro());
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnSimulationStart -= Hide;
     }
 
     private void Hide()

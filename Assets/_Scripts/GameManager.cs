@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static float InputCost;
     private readonly float startInputCost = 5f;
 
-    public event Action OnSimulationStart;
+    public static event Action OnSimulationStart;
     public event Action OnImpulseApplied;
 
     public SimulationCore Simulation => simulation;
@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     private SimulationCore simulation;
     
     private ScoreManager scoreManager;
+
+    [Header("Testing")]
+    [SerializeField] private int applyImpulseOverrideIndex = 0;
 
     private void Awake()
     {
@@ -84,5 +87,17 @@ public class GameManager : MonoBehaviour
     {
         timeController.HandlePlay();
         OnSimulationStart?.Invoke();
+    }
+
+    [EasyButtons.Button]
+    private void ApplyImpulse()
+    {
+        ApplyImpulse(applyImpulseOverrideIndex);
+    }
+
+    [EasyButtons.Button]
+    private void AddEQPoints()
+    {
+        ScoreManager.AddEqPoints();
     }
 }

@@ -39,7 +39,7 @@ Material:
     m_Floats:
     - _DayNightEnabled: 0.02
     - _DayNightSoftness: 0.01
-    - _FloraLevel: 0.87389714
+    - _FloraLevel: 0
     - _FloraReplace: 1
     - _FloraSoftness: 0
     - _FloraThreshold: 0
@@ -49,8 +49,8 @@ Material:
     - _NightDarkness: 0.835
     - _NoiseTiling: 1
     - _StylizeFlatness: 0.054
-    - _Temperature: 0.539597
-    - _WaterLevel: 0.31788066
+    - _Temperature: 0.14377883
+    - _WaterLevel: 0.38037333
     m_Colors:
     - _DesertColor: {r: 0.85, g: 0.75, b: 0.45, a: 1}
     - _FloraColor: {r: 0.0470588, g: 0.80784315, b: 0.41960782, a: 1}
